@@ -1,16 +1,85 @@
-# React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 1. Frontend Stack Choice
 
-Currently, two official plugins are available:
+I chose **React with Vite** for the frontend.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+**Reasons:**
+- React is widely used in production and well-suited for building component-based UIs.
+- Vite provides a very fast development server and simple configuration compared to older tools.
+- The combination is lightweight, easy to debug, and appropriate for a time-boxed assignment without over-engineering.
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 2. Firestore Data Structure 
 
-## Expanding the ESLint configuration
+Although the current implementation focuses on authentication and deployment, the intended Firestore structure was:
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Collection: `issues`
+
+Each issue document would contain:
+```json
+{
+  "title": "Login bug",
+  "description": "Login fails on mobile devices",
+  "priority": "High",
+  "status": "Open",
+  "assignedTo": "user@email.com",
+  "createdBy": "creator@email.com",
+  "createdAt": "timestamp"
+}
+```
+---
+
+## 3. Similar Issue Handling 
+
+The planned approach for handling similar issues was:
+
+When creating a new issue, fetch existing issues from Firestore.
+
+Compare the new issue title with existing titles using simple string matching.
+
+If a similar issue is found, show a warning to the user before allowing creation.
+
+This approach is simple, transparent to the user, and avoids unnecessary complexity.
+
+---
+
+## 4. What Was Confusing or Challenging
+
+Initial setup issues on Windows (Node, npm, PowerShell execution policies).
+
+Understanding how environment variables work with Vite and Firebase.
+
+Connecting Firebase Authentication correctly and handling errors during login/signup.
+
+Managing project setup, Git, and deployment together within a limited time.
+
+These challenges helped reinforce real-world debugging and setup skills.
+
+---
+
+## 5. What I Would Improve Next
+
+Given more time, I would:
+
+Complete the issue creation and listing features using Firestore.
+
+Add filtering by status and priority.
+
+Improve UI/UX with better layout and form validation.
+
+Add proper routing using React Router.
+
+Implement real-time updates using Firestore listeners.
+
+---
+
+## Deployment
+
+Frontend deployed on Vercel
+
+Firebase Authentication used for user login/signup
+
+Environment variables used for secure configuration
+
+---
